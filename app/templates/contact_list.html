@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Lista de Contactos</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre Completo</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.nombre }} {{ contact.apellido }}</td>
+                <td>{{ contact.email }}</td>
+                <td>{{ contact.telefono }}</td>
+                <td>
+                    <a href="{{ url_for('main.edit_contact', id=contact.id) }}" class="btn btn-sm btn-primary">Editar</a>
+                    <a href="{{ url_for('main.delete_contact', id=contact.id) }}" 
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('¿Está seguro de eliminar este contacto?')">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
